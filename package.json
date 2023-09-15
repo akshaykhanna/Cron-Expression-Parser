@@ -1,0 +1,19 @@
+{
+  "name": "cron-expression-parser",
+  "version": "1.0.0",
+  "description": "Parse cron expresesion",
+  "main": "cron_parser.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akshaykhanna/Cron-Expression-Parser.git"
+  },
+  "author": "Akshay Khanna",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akshaykhanna/Cron-Expression-Parser/issues"
+  },
+  "homepage": "https://github.com/akshaykhanna/Cron-Expression-Parser#readme"
+}
