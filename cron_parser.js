@@ -1,7 +1,8 @@
 const fieldNames = ['minute', 'hour', 'day of month', 'month', 'day of week', 'command'];
 const fieldsMap = {
-    'min': 'minute',
-    'hr': 'hour',
+    'min': {name: 'minute', start: 0, end: 59},
+    'hr': {name: 'hour', start: 0, end: 23},
+    'dayOfMonth': {name: 'hour', start: 0, end: 23},
     'dayOfMonth': 'day of month',
     'month': 'month',
     'dayOfWeek': 'day of week',
@@ -12,6 +13,9 @@ function expandField(fieldName, field) {
     const expandedField = [];
     if (field === '*') {
         return _allPossibleFields(fieldName);
+    }
+    if (fieldName === 'command') {
+        return [field];
     }
     const parts = field.split(',');
 
@@ -65,21 +69,23 @@ function extractFields(cronString) {
 }
 
 function parseCronString(cronString) {
+    let outputString = '';
     const cronFields = extractFields(cronString);
 
     if (cronFields.length !== 6) {
         return "Invalid cron string. Please provide all 6 fields.";
     }
 
-    console.log("cronString: ", cronFields);
 
     const expandedFields = cronFields.map((field, index) => expandField(fieldNames[index], field));
-    // const expandedFields = cronFields.map(expandField);
-    console.log("expandedFields: ", expandedFields);
 
     for (let i = 0; i < fieldNames.length; i++) {
-        console.log(`${fieldNames[i].padEnd(14)}${expandedFields[i].join(' ')}`);
+        outputString += `${fieldNames[i].padEnd(14)}${expandedFields[i].join(' ')}`;
+        if(i < fieldNames.length - 1) {
+            outputString += '\n';
+        }
     }
+    return outputString;
 }
 
 const args = process.argv.slice(2);
@@ -90,6 +96,6 @@ if (args.length !== 1) {
 }
 
 const cronString = args[0];
-parseCronString(cronString);
+console.log(parseCronString(cronString));
 
 module.exports = { extractFields, expandField, parseCronString };

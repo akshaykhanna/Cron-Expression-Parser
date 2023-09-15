@@ -11,7 +11,7 @@ describe('extractFields', () => {
        
 });
 describe('expandField', () => {
-    it.only('expands a cron field correctly', () => {
+    it('expands a cron field correctly', () => {
         expect(expandField('minute', '*')).toEqual(Array.from({ length: 60 }, (_, i) => i));
         expect(expandField('hour', '5')).toEqual([5]);
         expect(expandField('month', '1,2,3')).toEqual([1, 2, 3]);
@@ -32,12 +32,11 @@ describe('parseCronString', () => {
             'command       /usr/bin/find'
         ].join('\n');
 
-        expect(() => parseCronString(cronString)).not.toThrow();
-        expect(console.log).toHaveBeenCalledWith(expectedOutput);
+        expect(parseCronString(cronString)).toEqual(expectedOutput);
     });
 
     it('handles invalid cron strings', () => {
         const invalidCronString = '*/15 0 1,15 * 1-5';
-        expect(() => parseCronString(invalidCronString)).toThrow("Invalid cron string. Please provide all 6 fields.");
+        expect(parseCronString(invalidCronString)).toEqual("Invalid cron string. Please provide all 6 fields.");
     });
 });
