@@ -45,3 +45,5 @@ if (args.length !== 1) {
 
 const cronString = args[0];
 parseCronString(cronString);
+
+module.exports = { expandField, parseCronString };

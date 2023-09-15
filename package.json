@@ -4,7 +4,7 @@
   "description": "Parse cron expresesion",
   "main": "cron_parser.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx jest cron_parser.test.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/akshaykhanna/Cron-Expression-Parser/issues"
   },
-  "homepage": "https://github.com/akshaykhanna/Cron-Expression-Parser#readme"
+  "homepage": "https://github.com/akshaykhanna/Cron-Expression-Parser#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }
