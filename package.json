@@ -2,9 +2,12 @@
   "name": "cron-expression-parser",
   "version": "1.0.0",
   "description": "Parse cron expresesion",
-  "main": "cron_parser.js",
+  "main": "execute.js",
   "scripts": {
-    "test": "npx jest cron_parser.test.js"
+    "test": "npx jest tests",
+    "execute" : "node src/execute.js",
+    "exec" : "node src/execute.js",
+    "start" : "npm run execute"
   },
   "repository": {
     "type": "git",

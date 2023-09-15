@@ -1,4 +1,4 @@
-const { extractFields, expandField, parseCronString } = require('./cron_parser');
+const { extractFields, expandField, parseCronString } = require('../src/cron-parser');
 
 describe('extractFields', () => {
     it('extractFields cron field correctly', () => {
