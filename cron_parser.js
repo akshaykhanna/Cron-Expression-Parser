@@ -1,16 +1,28 @@
-function expandField(field) {
+const fieldNames = ['minute', 'hour', 'day of month', 'month', 'day of week', 'command'];
+const fieldsMap = {
+    'min': 'minute',
+    'hr': 'hour',
+    'dayOfMonth': 'day of month',
+    'month': 'month',
+    'dayOfWeek': 'day of week',
+    'cmd': 'command'
+};
+
+function expandField(fieldName, field) {
     const expandedField = [];
+    if (field === '*') {
+        return _allPossibleFields(fieldName);
+    }
     const parts = field.split(',');
 
     for (const part of parts) {
         if (part.includes('-')) {
             const [start, end] = part.split('-').map(Number);
-            for (let i = start; i <= end; i++) {
-                expandedField.push(i);
-            }
+            expandedField.push(..._generateFieldBtw(start, end));
         } else if (part.includes('/')) {
-            const [start, step] = part.split('/').map(Number);
-            for (let i = start; i < 60; i += step) {
+            let [start, step] = part.split('/');
+            start = start === '*' ? 0 : Number(start);
+            for (let i = start; i < 60; i += Number(step)) {
                 expandedField.push(i);
             }
         } else {
@@ -18,18 +30,52 @@ function expandField(field) {
         }
     }
 
-    return Array.from(new Set(expandedField)).sort((a, b) => a - b);
+    // return Array.from(new Set(expandedField)).sort((a, b) => a - b);
+    return expandedField;
+}
+
+function _generateFieldBtw(start, end) {
+    const result = [];
+    for (let i = start; i <= end; i++) {
+        result.push(i);
+    }
+    return result;
+}
+
+function _allPossibleFields(fieldName) {
+    switch (fieldName) {
+        case 'minute':
+            return Array.from({ length: 60 }, (_, i) => i);
+        case 'hour':
+            return Array.from({ length: 24 }, (_, i) => i);
+        case 'day of month':
+            return Array.from({ length: 31 }, (_, i) => i + 1);
+        case 'month':
+            return Array.from({ length: 12 }, (_, i) => i + 1);
+        case 'day of week':
+            return Array.from({ length: 7 }, (_, i) => i);
+        default:
+            return [];
+    }
+}
+
+function extractFields(cronString) {
+    const cronFields = cronString.split(' ');
+    return cronFields;
 }
 
 function parseCronString(cronString) {
-    const cronFields = cronString.split(' ');
+    const cronFields = extractFields(cronString);
 
     if (cronFields.length !== 6) {
         return "Invalid cron string. Please provide all 6 fields.";
     }
 
-    const fieldNames = ['minute', 'hour', 'day of month', 'month', 'day of week', 'command'];
-    const expandedFields = cronFields.map(expandField);
+    console.log("cronString: ", cronFields);
+
+    const expandedFields = cronFields.map((field, index) => expandField(fieldNames[index], field));
+    // const expandedFields = cronFields.map(expandField);
+    console.log("expandedFields: ", expandedFields);
 
     for (let i = 0; i < fieldNames.length; i++) {
         console.log(`${fieldNames[i].padEnd(14)}${expandedFields[i].join(' ')}`);
@@ -46,4 +92,4 @@ if (args.length !== 1) {
 const cronString = args[0];
 parseCronString(cronString);
 
-module.exports = { expandField, parseCronString };
+module.exports = { extractFields, expandField, parseCronString };

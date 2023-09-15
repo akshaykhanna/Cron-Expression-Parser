@@ -1,12 +1,22 @@
-const { expandField, parseCronString } = require('./cron_parser');
+const { extractFields, expandField, parseCronString } = require('./cron_parser');
 
+describe('extractFields', () => {
+    it('extractFields cron field correctly', () => {
+        const cronString = '*/15 0 1,15 * 1-5 /usr/bin/find';
+        const actualExtractedFields = extractFields(cronString);
+        const expectedExtractedFields = ['*/15', '0', '1,15', '*', '1-5', '/usr/bin/find'];
+        expect(actualExtractedFields.length).toEqual(6);
+        expect(actualExtractedFields).toEqual(expectedExtractedFields);
+    });
+       
+});
 describe('expandField', () => {
-    it('expands a cron field correctly', () => {
-        expect(expandField('*')).toEqual(Array.from({ length: 60 }, (_, i) => i));
-        expect(expandField('5')).toEqual([5]);
-        expect(expandField('1,2,3')).toEqual([1, 2, 3]);
-        expect(expandField('10-15')).toEqual([10, 11, 12, 13, 14, 15]);
-        expect(expandField('*/10')).toEqual([0, 10, 20, 30, 40, 50]);
+    it.only('expands a cron field correctly', () => {
+        expect(expandField('minute', '*')).toEqual(Array.from({ length: 60 }, (_, i) => i));
+        expect(expandField('hour', '5')).toEqual([5]);
+        expect(expandField('month', '1,2,3')).toEqual([1, 2, 3]);
+        expect(expandField('day of month', '10-15')).toEqual([10, 11, 12, 13, 14, 15]);
+        expect(expandField('minute', '*/10')).toEqual([0, 10, 20, 30, 40, 50]);
     });
 });
 
