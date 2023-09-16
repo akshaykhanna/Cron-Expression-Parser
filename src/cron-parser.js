@@ -37,9 +37,18 @@ function expandField(fieldKey, field) {
     return expandedField;
 }
 
-function _generateFieldBtw(start, end) {
+function _getValidStartAndEnd(start, end, fieldKey) {
+    if(fieldKey && fieldKey in fieldsMap) {
+        const fieldObj = fieldsMap[fieldKey];
+        var validStart = !start || start === '*' ? fieldObj.start : Number(start);
+        var validEnd = !end || end === '*' ? fieldObj.end : Number(end);
+    }
+    return [ validStart, validEnd ];
+}
+
+function _generateFieldBtw(start, end, fieldKey, step = 1) {
     const result = [];
-    for (let i = start; i <= end; i++) {
+    for (let i = start; i <= end; i += step) {
         result.push(i);
     }
     return result;
