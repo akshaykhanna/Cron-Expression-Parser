@@ -1,4 +1,4 @@
-const cronParser = require('./main/cron-parser');
+const parseCronString = require('./main/cron-parser');
 
 const args = process.argv.slice(2);
 
@@ -8,4 +8,4 @@ if (args.length !== 1) {
 }
 
 const cronString = args[0];
-console.log(cronParser.parseCronString(cronString));
+console.log(parseCronString(cronString));

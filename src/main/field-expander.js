@@ -1,6 +1,6 @@
 const {fieldsMap } = require('./constants');
 
-function expandField(fieldKey, field) {
+module.exports = function (fieldKey, field) {
     if (fieldKey === 'cmd') {
         return [field];
     }
@@ -49,5 +49,3 @@ function _getAllPossibleFields(fieldKey) {
     const { start, end } = fieldsMap[fieldKey];
     return _generateFieldBtw(start, end);
 }
-
-module.exports = { expandField };

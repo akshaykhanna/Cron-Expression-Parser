@@ -1,15 +1,5 @@
-const { extractFields, parseCronString } = require('../main/cron-parser');
+const parseCronString = require('../main/cron-parser');
 
-describe('extractFields', () => {
-    it('extractFields cron field correctly', () => {
-        const cronString = '*/15 0 1,15 * 1-5 /usr/bin/find';
-        const actualExtractedFields = extractFields(cronString);
-        const expectedExtractedFields = ['*/15', '0', '1,15', '*', '1-5', '/usr/bin/find'];
-        expect(actualExtractedFields.length).toEqual(6);
-        expect(actualExtractedFields).toEqual(expectedExtractedFields);
-    });
-       
-});
 
 describe('parseCronString', () => {
     it('parses a valid cron string correctly', () => {

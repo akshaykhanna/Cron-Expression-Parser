@@ -1,14 +1,9 @@
 const { fieldsMap, fieldKeys } = require('./constants');
-const { expandField } = require('./field-expander');
+const expandField = require('./field-expander');
 
-function extractFields(cronString) {
-    const cronFields = cronString.split(' ');
-    return cronFields;
-}
-
-function parseCronString(cronString) {
+module.exports = function (cronString) {
     let outputString = '';
-    const cronFields = extractFields(cronString);
+    const cronFields = _extractFields(cronString);
 
     if (cronFields.length !== 6) {
         return "Invalid cron string. Please provide all 6 fields.";
@@ -25,4 +20,8 @@ function parseCronString(cronString) {
     return outputString;
 }
 
-module.exports = { extractFields, parseCronString };
+function _extractFields(cronString) {
+    const cronFields = cronString.split(' ');
+    return cronFields;
+}
+
