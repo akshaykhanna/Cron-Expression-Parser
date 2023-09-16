@@ -25,8 +25,8 @@ describe('expandField', () => {
         expect(expandField('dayOfWeek', '1-3')).toEqual([1, 2, 3]);
         expect(expandField('cmd', '2-5')).toEqual(['2-5']);
     });
-    xit('expands all cron fields with *-* value', () => {
-        expect(expandField('min', '*-5')).toEqual([1,2,3,4,5]);
+    it('expands all cron fields with *-* value', () => {
+        expect(expandField('min', '*-5')).toEqual([0,1,2,3,4,5]);
         expect(expandField('hr', '20-*')).toEqual([20,21,22,23]);
         expect(expandField('dayOfMonth', '27-*')).toEqual([27,28,29,30,31]);
         expect(expandField('month', '*-*')).toEqual([1,2,3,4,5,6,7,8,9,10,11,12]);

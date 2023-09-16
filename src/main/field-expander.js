@@ -6,7 +6,7 @@ function expandField(fieldKey, field) {
     }
     const expandedField = [];
     if (field === '*') {
-        return _allPossibleFields(fieldKey);
+        return _getAllPossibleFields(fieldKey);
     }
     const parts = field.split(',');
 
@@ -27,10 +27,11 @@ function expandField(fieldKey, field) {
 }
 
 function _getValidStartAndEnd(start, end, fieldKey) {
+    let [validStart, validEnd] = [start, end];
     if(fieldKey && fieldKey in fieldsMap) {
         const fieldObj = fieldsMap[fieldKey];
-        var validStart = !start || start === '*' ? fieldObj.start : Number(start);
-        var validEnd = !end || end === '*' ? fieldObj.end : Number(end);
+        validStart = !start || start === '*' ? fieldObj.start : Number(start);
+        validEnd = !end || end === '*' ? fieldObj.end : Number(end);
     }
     return [ validStart, validEnd ];
 }
@@ -44,9 +45,9 @@ function _generateFieldBtw(start, end, fieldKey, step = 1) {
     return result;
 }
 
-function _allPossibleFields(fieldKey) {
+function _getAllPossibleFields(fieldKey) {
     const { start, end } = fieldsMap[fieldKey];
-    return _generateFieldBtw(start, end, fieldKey);
+    return _generateFieldBtw(start, end);
 }
 
 module.exports = { expandField };
