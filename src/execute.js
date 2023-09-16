@@ -1,4 +1,4 @@
-const cronParser = require('./cron-parser');
+const cronParser = require('./main/cron-parser');
 
 const args = process.argv.slice(2);
 
