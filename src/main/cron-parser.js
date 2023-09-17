@@ -2,7 +2,7 @@ const { fieldsMap, fieldKeys } = require('./constants');
 const expandField = require('./field-expander');
 
 module.exports = function (cronString) {
-    let outputString = '';
+    let outputLines = [];
     const cronFields = _extractFields(cronString);
 
     if (cronFields.length !== 6) {
@@ -12,16 +12,13 @@ module.exports = function (cronString) {
 
     for (let i = 0; i < fieldKeys.length; i++) {
         const fieldName = fieldsMap[fieldKeys[i]].name;
-        outputString += `${fieldName.padEnd(14)}${expandedFields[i].join(' ')}`;
-        if (i < fieldKeys.length - 1) {
-            outputString += '\n';
-        }
+        outputLines.push(`${fieldName.padEnd(14)}${expandedFields[i].join(' ')}`);
     }
-    return outputString;
+    return outputLines;
 }
 
 function _extractFields(cronString) {
     const cronFields = cronString.split(' ');
     return cronFields;
-}
+} 
 

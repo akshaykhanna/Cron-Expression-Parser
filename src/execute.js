@@ -8,4 +8,4 @@ if (args.length !== 1) {
 }
 
 const cronString = args[0];
-console.log(parseCronString(cronString));
+console.log(parseCronString(cronString).join('\n'));
