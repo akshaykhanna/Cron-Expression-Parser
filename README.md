@@ -4,7 +4,7 @@ Command line application or script which parses a cron string and expands each f
 ## Setup
  - Clone repo
  - Install node (>= 14) if not already present.
- - `npm install` in repo folder to install node dependencies .
+ - `npm install` in repo folder to install node dependencies for this project.
 
 ## Steps to run
 Run `npm run exec` followed by `cron_string` in quotes in node terminal to print the parse cron string as output.
@@ -13,7 +13,14 @@ Run `npm run exec` followed by `cron_string` in quotes in node terminal to print
 ## Run tests
 > npm run test
 
+## What is cron string ?
+
+A Cron string, often referred to as a Cron expression or Cron schedule, is a string of text used to represent a schedule for executing recurring tasks or jobs on Unix-like operating systems. It specifies when and how often a task should run, down to the minute, hour, day, month, and day of the week. Cron strings are commonly used for automating routine system maintenance, running scripts, or scheduling other repetitive tasks.
+
+It provide a flexible and powerful way to schedule recurring tasks, making them a fundamental tool for system administrators and developers working with Unix-based systems.
+
 ## What is a valid cron string ?
+
 A valid Cron string must adhere to specific rules and format to be considered valid. Here are the typical validations for a valid Cron string:
 
 Number of Fields: A valid Cron string should consist of six fields separated by spaces: minute, hour, day of the month, month, day of the week, and the command. If there are not exactly six fields, it's invalid.
