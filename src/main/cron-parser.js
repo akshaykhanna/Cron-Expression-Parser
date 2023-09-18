@@ -3,7 +3,7 @@ const expandField = require('./field-expander');
 
 module.exports = function (cronString) {
     let outputLines = [];
-    const cronFields = _extractFields(cronString);
+    const cronFields = _extractFields(_sanitiesInput(cronString));
 
     if (cronFields.length !== 6) {
         return "Invalid cron string. Please provide all 6 fields.";
@@ -16,6 +16,10 @@ module.exports = function (cronString) {
     }
     return outputLines;
 }
+
+function _sanitiesInput (cronString) {
+    return cronString.trim();
+}   
 
 function _extractFields(cronString) {
     const cronFields = cronString.split(' ');

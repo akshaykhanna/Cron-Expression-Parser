@@ -16,7 +16,6 @@ module.exports = function (fieldKey, field) {
             expandedField.push(..._generateFieldBtw(start, end, fieldKey));
         } else if (part.includes('/')) {
             let [start, step] = part.split('/');
-            start = start === '*' ? 0 : Number(start);
             expandedField.push(..._generateFieldBtw(start, fieldsMap[fieldKey].end, fieldKey, Number(step)));
         } else {
             expandedField.push(Number(part));
