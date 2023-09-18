@@ -7,3 +7,6 @@ exports.fieldsMap = {
     'cmd': { name: 'command', start: -1, end: -1 },
 };
 exports.fieldKeys = ['min', 'hr', 'dayOfMonth', 'month', 'dayOfWeek', 'cmd'];
+exports.PAD_LENGTH = 14;
+exports.EMPTY_SPACE = ' ';
+exports.NO_OF_CRON_FIELDS = 6;
