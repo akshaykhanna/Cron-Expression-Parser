@@ -14,7 +14,7 @@ describe('expandField', () => {
         expect(expandField('hr', '*')).toEqual(Array.from({ length: 24 }, (_, i) => i));
         expect(expandField('dayOfMonth', '*')).toEqual(Array.from({ length: 31 }, (_, i) => i + 1));
         expect(expandField('month', '*')).toEqual(Array.from({ length: 12 }, (_, i) => i + 1));
-        expect(expandField('dayOfWeek', '*')).toEqual(Array.from({ length: 7 }, (_, i) => i + 1));
+        expect(expandField('dayOfWeek', '*')).toEqual(Array.from({ length: 7 }, (_, i) => i ));
         expect(expandField('cmd', '*')).toEqual(['*']);
     });
     it('expands all cron fields with - value', () => {
@@ -30,7 +30,7 @@ describe('expandField', () => {
         expect(expandField('hr', '20-*')).toEqual([20, 21, 22, 23]);
         expect(expandField('dayOfMonth', '27-*')).toEqual([27, 28, 29, 30, 31]);
         expect(expandField('month', '*-*')).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-        expect(expandField('dayOfWeek', '*-*')).toEqual([1, 2, 3, 4, 5, 6, 7]);
+        expect(expandField('dayOfWeek', '*-*')).toEqual([0, 1, 2, 3, 4, 5, 6]);
         expect(expandField('cmd', '2-5')).toEqual(['2-5']);
     });
 });
